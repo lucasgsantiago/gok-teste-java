@@ -44,5 +44,7 @@ E lembre-se! Um bom software é um software bem **testado**.
 
 Nosso template esta utilizando um banco de dados Postgress com um database chamado planets, mas fique a vontade em utilizar o banco que quiser da forma que achar melhor.
 
-
+## Docker
+Na pasta "./src/main/resources/container" irá estar localizado o arquivo docker para iniciar a aplicação.
+No diretorio acima rodar o "docker-compose up" para subir do banco em postgres
 

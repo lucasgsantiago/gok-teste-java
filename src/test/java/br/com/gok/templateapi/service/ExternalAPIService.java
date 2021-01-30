@@ -13,12 +13,11 @@ import static org.hamcrest.Matchers.notNullValue;
 public class ExternalAPIService {
 
     @Autowired
-    private StarWarsPublicAPIClient swapiService;
+    private ISWAPIService swapiService;
 
     @Test
     public void whenAValidPlanetNameIsPassedShouldReturnAPlanet(){
         SwapiPlanetDTO planet = swapiService.getPlanetByName("Tatooine");
         assertThat(planet,is(notNullValue()));
-
     }
 }

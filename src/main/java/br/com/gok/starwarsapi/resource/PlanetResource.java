@@ -6,6 +6,8 @@ import br.com.gok.starwarsapi.service.IPlanetService;
 import br.com.gok.starwarsapi.util.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +22,7 @@ public class PlanetResource {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public PageResponse<PlanetDTO> get(Pageable pageable){
+	public PageResponse<PlanetDTO> get(@PageableDefault Pageable pageable){
 		return service.listAll(pageable);
 	}
 

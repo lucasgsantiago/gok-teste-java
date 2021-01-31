@@ -20,12 +20,12 @@ spring:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 enable_lazy_load_no_trans: true
                 format_sql: true
-                show_sql: true
+#                show_sql: true
                 temp:
                     use_jdbc_metadata_defaults: false
                 type: trace
                 use_sql_comments: false
-        show-sql: true
+#        show-sql: true
     profiles:
         active: local
 
@@ -39,3 +39,9 @@ security:
     user:
         name: admin
         password: admin
+
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: DEBUG

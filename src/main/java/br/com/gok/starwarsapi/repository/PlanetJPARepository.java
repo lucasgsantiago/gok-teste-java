@@ -3,13 +3,13 @@ package br.com.gok.starwarsapi.repository;
 import br.com.gok.starwarsapi.domain.postgres.IPlanetRepository;
 import br.com.gok.starwarsapi.domain.postgres.Planet;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class PlanetRepository implements IPlanetRepository {
+public class PlanetJPARepository implements IPlanetRepository {
 
     private final IPlanetJPARepository repository;
 
@@ -24,8 +24,8 @@ public class PlanetRepository implements IPlanetRepository {
     }
 
     @Override
-    public List<Planet> get() {
-        return repository.findAll();
+    public Page<Planet> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override

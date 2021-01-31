@@ -2,7 +2,12 @@ package br.com.gok.starwarsapi.service;
 
 import br.com.gok.starwarsapi.domain.postgres.IPlanetRepository;
 import br.com.gok.starwarsapi.domain.postgres.Planet;
+import br.com.gok.starwarsapi.dto.PlanetDTO;
+import br.com.gok.starwarsapi.util.PageResponse;
+import br.com.gok.starwarsapi.util.PlanetMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,25 +16,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlanetService implements IPlanetService {
     private final IPlanetRepository repository;
+    private final IUpdatePlanetsFromSwapiService updatePlanetsFromSwapiService;
+
+    private PlanetMapper mapper = PlanetMapper.INSTANCE;
 
     @Override
-    public List<Planet> listAll() {
-        return repository.get();
+    public PageResponse<PlanetDTO> listAll(Pageable pageable) {
+        Page<Planet> page = repository.getAll(pageable);
+
+        if(page.isEmpty()){
+            page = updatePlanetsFromSwapiService.execute(pageable);
+        }
+
+        return new PageResponse<>(page.getSize(),page.getTotalPages(),page.getNumber(),page.getTotalElements(),mapper.toPresenter(page.getContent()));
     }
 
     @Override
-    public List<Planet> filterByPopulation() {
+    public List<PlanetDTO> filterByPopulation() {
         return null;
     }
 
     @Override
-    public Planet findByName(String name) {
-        return repository.getByName(name);
+    public PlanetDTO findByName(String name) {
+        return mapper.toPresenter(repository.getByName(name));
     }
 
     @Override
-    public Planet findById(Long id) {
-        return repository.getById(id);
+    public PlanetDTO findById(Long id) {
+        return mapper.toPresenter(repository.getById(id));
     }
 
     @Override

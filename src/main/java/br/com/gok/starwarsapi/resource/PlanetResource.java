@@ -1,8 +1,11 @@
 package br.com.gok.starwarsapi.resource;
 
 import br.com.gok.starwarsapi.domain.postgres.Planet;
+import br.com.gok.starwarsapi.dto.PlanetDTO;
 import br.com.gok.starwarsapi.service.IPlanetService;
+import br.com.gok.starwarsapi.util.PageResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +20,10 @@ public class PlanetResource {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<Planet> get() {
-		return service.listAll();
+	public PageResponse<PlanetDTO> get(Pageable pageable){
+		return service.listAll(pageable);
 	}
+
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)

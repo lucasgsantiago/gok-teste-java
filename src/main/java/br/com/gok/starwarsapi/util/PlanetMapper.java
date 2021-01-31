@@ -15,7 +15,6 @@ public interface PlanetMapper {
 
 //    PlanetDTO toDomain(CreateOrderCommand command);
     PlanetDTO toPresenter(Planet model);
-    PageImpl toPresenter(PageImpl model);
     @IterableMapping(elementTargetType = PlanetDTO.class)
     List<PlanetDTO> toPresenter(List<Planet> list);
 }

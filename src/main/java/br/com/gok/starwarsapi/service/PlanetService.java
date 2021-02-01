@@ -3,6 +3,7 @@ package br.com.gok.starwarsapi.service;
 import br.com.gok.starwarsapi.domain.postgres.IPlanetRepository;
 import br.com.gok.starwarsapi.domain.postgres.Planet;
 import br.com.gok.starwarsapi.dto.PlanetDTO;
+import br.com.gok.starwarsapi.exception.BadRequestException;
 import br.com.gok.starwarsapi.exception.NotFoundException;
 import br.com.gok.starwarsapi.util.*;
 import lombok.RequiredArgsConstructor;
@@ -62,4 +63,7 @@ public class PlanetService implements IPlanetService {
         return new PageResponse<PlanetDTO>(page.getSize(),page.getTotalPages(),page.getNumber(),page.getTotalElements(),mapper.toPresenter(page.getContent()));
     }
 
+    private void checkIfPlanetExistsWithName(String name){
+        if(repository.findByName(name).isPresent()) new BadRequestException(Constants.PLANET_ALREADY_EXISTS);
+    }
 }

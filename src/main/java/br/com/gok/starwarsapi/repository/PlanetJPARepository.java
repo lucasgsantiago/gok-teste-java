@@ -23,8 +23,8 @@ public class PlanetJPARepository implements IPlanetRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        repository.delete(new Planet(id));
+    public void delete(Planet planet) {
+        repository.delete(planet);
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IPlanetRepository {
 
     Planet save(Planet model);
-    void delete(Long id);
+    void delete(Planet planet);
     Page<Planet> getAll(Pageable pageable);
     Optional<Planet> findByName(String name);
     Optional<Planet> findById(Long id);

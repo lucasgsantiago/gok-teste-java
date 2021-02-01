@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/starwars/v1/planets")
 @RestController
 @RequiredArgsConstructor
-public class PlanetResource {
+public class PlanetResource implements IPlanetResourceDoc{
 
 	private final IPlanetService service;
 
@@ -41,7 +41,7 @@ public class PlanetResource {
 	}
 
 	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
 		service.remove(id);
 	}

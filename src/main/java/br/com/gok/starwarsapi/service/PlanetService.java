@@ -47,7 +47,8 @@ public class PlanetService implements IPlanetService {
 
     @Override
     public void remove(Long id) {
-        repository.delete(id);
+        Planet planet = repository.findById(id).orElseThrow(() -> new NotFoundException(Constants.PLANET_NOT_FOUND));
+        repository.delete(planet);
     }
 
     @Override

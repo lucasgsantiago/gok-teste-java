@@ -25,4 +25,8 @@ public class Planet extends AuditModel{
     private String terrain;
     private Long population;
     private Integer appearancesInMovies;
+
+    public Planet(Long id) {
+        this.id = id;
+    }
 }

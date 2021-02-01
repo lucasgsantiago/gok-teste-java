@@ -34,6 +34,12 @@ public class PlanetResource {
 		return this.service.findByName(name);
 	}
 
+	@GetMapping("/filter")
+	@ResponseStatus(HttpStatus.OK)
+	public PageResponse<PlanetDTO> filterByPopulation(@RequestParam("query") String query,@ParameterObject Pageable pageable) {
+		return this.service.filterByQuery(query,pageable);
+	}
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable Long id) {

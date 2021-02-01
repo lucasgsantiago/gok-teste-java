@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Builder
@@ -15,10 +16,13 @@ import java.util.Set;
 @NoArgsConstructor
 @JsonInclude(value = Include.NON_NULL)
 public class PlanetDTO {
-    public Long id;
-    public String name;
-    public String climate;
-    public String terrain;
-    public String population;
-    public Set<String> films;
+    private Long id;
+    private String name;
+    private String climate;
+    private String terrain;
+    private String population;
+    private Integer appearancesInMovies;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private Set<String> films;
 }

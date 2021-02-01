@@ -32,7 +32,7 @@ public class PlanetJPARepository implements IPlanetRepository {
 
     @Override
     public Optional<Planet> findByName(String name) {
-        return findByName(name);
+        return repository.findByName(name);
     }
 
     @Override

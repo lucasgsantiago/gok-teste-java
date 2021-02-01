@@ -28,7 +28,7 @@ public class PlanetResource {
 		return this.service.findById(id);
 	}
 
-	@GetMapping("/filter")
+	@GetMapping("/search")
 	@ResponseStatus(HttpStatus.OK)
 	public PlanetDTO findByName(@RequestParam("name") String name) {
 		return this.service.findByName(name);

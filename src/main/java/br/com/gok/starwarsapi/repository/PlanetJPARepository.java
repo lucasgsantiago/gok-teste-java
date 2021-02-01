@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class PlanetJPARepository implements IPlanetRepository {
@@ -29,12 +31,12 @@ public class PlanetJPARepository implements IPlanetRepository {
     }
 
     @Override
-    public Planet getByName(String name) {
-        return null;
+    public Optional<Planet> findByName(String name) {
+        return findByName(name);
     }
 
     @Override
-    public Planet getById(Long id) {
-        return null;
+    public Optional<Planet> findById(Long id) {
+        return repository.findById(id);
     }
 }

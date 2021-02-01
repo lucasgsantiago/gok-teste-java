@@ -3,6 +3,8 @@ package br.com.gok.starwarsapi.service;
 import br.com.gok.starwarsapi.domain.postgres.IPlanetRepository;
 import br.com.gok.starwarsapi.domain.postgres.Planet;
 import br.com.gok.starwarsapi.dto.PlanetDTO;
+import br.com.gok.starwarsapi.exception.NotFoundException;
+import br.com.gok.starwarsapi.util.Constants;
 import br.com.gok.starwarsapi.util.PageResponse;
 import br.com.gok.starwarsapi.util.PlanetMapper;
 import lombok.RequiredArgsConstructor;
@@ -38,12 +40,12 @@ public class PlanetService implements IPlanetService {
 
     @Override
     public PlanetDTO findByName(String name) {
-        return mapper.toPresenter(repository.getByName(name));
+        return repository.findByName(name).map(mapper::toPresenter).orElseThrow(() -> new NotFoundException(Constants.PLANET_NOT_FOUND));
     }
 
     @Override
     public PlanetDTO findById(Long id) {
-        return mapper.toPresenter(repository.getById(id));
+        return repository.findById(id).map(mapper::toPresenter).orElseThrow(() -> new NotFoundException(Constants.PLANET_NOT_FOUND));
     }
 
     @Override

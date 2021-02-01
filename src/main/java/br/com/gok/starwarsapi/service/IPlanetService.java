@@ -6,6 +6,7 @@ import br.com.gok.starwarsapi.util.PageResponse;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IPlanetService {
     PageResponse<PlanetDTO> listAll(Pageable pageable);

@@ -15,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @JsonInclude(value = Include.NON_NULL)
 public class PlanetDTO {
+    public Long id;
     public String name;
     public String climate;
     public String terrain;

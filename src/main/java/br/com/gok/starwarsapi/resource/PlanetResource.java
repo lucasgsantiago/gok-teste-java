@@ -22,6 +22,18 @@ public class PlanetResource {
 		return service.listAll(pageable);
 	}
 
+	@GetMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public PlanetDTO findById(@PathVariable("id") Long id) {
+		return this.service.findById(id);
+	}
+
+	@GetMapping("/filter")
+	@ResponseStatus(HttpStatus.OK)
+	public PlanetDTO findByName(@RequestParam("name") String name) {
+		return this.service.findByName(name);
+	}
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable Long id) {

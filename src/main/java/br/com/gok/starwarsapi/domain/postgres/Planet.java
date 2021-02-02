@@ -6,25 +6,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(uniqueConstraints=
+    @UniqueConstraint(columnNames={"name"}))
 public class Planet extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
     private String name;
     private String climate;
     private String terrain;
-    private Long population;
+    private BigInteger population;
     private Integer appearancesInMovies;
-
-    public Planet(Long id) {
-        this.id = id;
-    }
 }

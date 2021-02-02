@@ -52,5 +52,10 @@ public class PlanetJPARepository implements IPlanetRepository {
         return repository.findAll(new PlanetSpecification(searchCriteria),pageable);
     }
 
+    @Override
+    public boolean existsByName(String name) {
+        return repository.existsByName(name);
+    }
+
 
 }

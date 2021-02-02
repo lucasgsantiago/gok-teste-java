@@ -22,8 +22,8 @@ public class SwapiFeignService implements ISWAPIService {
 
     @Override
     public PageResponse<SwapiPlanetDTO> getPlanets() {
-        PageResponse<SwapiPlanetDTO> rersponse = null;
         SwapiPageDTO page = swapiClient.getPlanets();
+        eventPublisher.publishPlanetFoundFromSwapiEvent(page);
         return new PageResponse<SwapiPlanetDTO>(10,page.getCount()/10,page.getCount(),page.getCount(),page.getResults());
     }
 

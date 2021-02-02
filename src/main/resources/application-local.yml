@@ -15,7 +15,7 @@ spring:
         properties:
             hibernate:
                 current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
-                ddl-auto: update
+                ddl-auto: create-drop
                 default_schema: public
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 enable_lazy_load_no_trans: true

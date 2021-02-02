@@ -14,4 +14,6 @@ public interface IPlanetJPARepository extends JpaRepository<Planet,Long>, JpaSpe
 
     @Override
     Page<Planet> findAll(Specification<Planet> specification, Pageable pageable);
+
+    boolean existsByName(String name);
 }

@@ -9,7 +9,7 @@ spring:
             FAIL_ON_EMPTY_BEANS: false
     jpa:
         database-platform: org.hibernate.dialect.PostgreSQLDialect
-        generate-ddl: true
+        generate-ddl: false
         hibernate:
             naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
             ddl-auto: create-drop
@@ -41,8 +41,8 @@ security:
         name: admin
         password: admin
 
-logging:
-    level:
-        org:
-            hibernate:
-                SQL: DEBUG
+#logging:
+#    level:
+#        org:
+#            hibernate:
+#                SQL: DEBUG

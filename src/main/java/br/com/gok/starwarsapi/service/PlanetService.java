@@ -3,7 +3,6 @@ package br.com.gok.starwarsapi.service;
 import br.com.gok.starwarsapi.domain.postgres.IPlanetRepository;
 import br.com.gok.starwarsapi.domain.postgres.Planet;
 import br.com.gok.starwarsapi.dto.PlanetDTO;
-import br.com.gok.starwarsapi.exception.BadRequestException;
 import br.com.gok.starwarsapi.exception.NotFoundException;
 import br.com.gok.starwarsapi.util.*;
 import lombok.RequiredArgsConstructor;
@@ -17,23 +16,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlanetService implements IPlanetService {
     private final IPlanetRepository repository;
-    private final IUpdatePlanetsFromSwapiService updatePlanetsFromSwapiService;
+    private final ISavePlanetsFromSwapiService updatePlanetsFromSwapiService;
 
     private PlanetMapper mapper = PlanetMapper.INSTANCE;
 
     @Override
     public PageResponse<PlanetDTO> listAll(Pageable pageable) {
-        Page<Planet> page = repository.getAll(pageable);
-
-        if(page.isEmpty()){
-            page = updatePlanetsFromSwapiService.execute(pageable);
-        }
-        return createPageResponse(page);
-    }
-
-    @Override
-    public List<PlanetDTO> filterByPopulation() {
-        return null;
+        return createPageResponse(repository.getAll(pageable));
     }
 
     @Override
@@ -63,7 +52,4 @@ public class PlanetService implements IPlanetService {
         return new PageResponse<PlanetDTO>(page.getSize(),page.getTotalPages(),page.getNumber(),page.getTotalElements(),mapper.toPresenter(page.getContent()));
     }
 
-    private void checkIfPlanetExistsWithName(String name){
-        if(repository.findByName(name).isPresent()) new BadRequestException(Constants.PLANET_ALREADY_EXISTS);
-    }
 }

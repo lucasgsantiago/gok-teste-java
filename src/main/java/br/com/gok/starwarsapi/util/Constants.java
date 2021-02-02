@@ -5,6 +5,7 @@ public class Constants {
 	public static final String BAD_REQUEST_NOT_VALID = "Field %s: not valid, value %s";
 	public static final String PLANET_NOT_FOUND = "Planet not found";
 	public static final String INVALID_QUERY = "Query is invalid";
+    public static final String CALL_EXTERNAL_API_ERROR = "Error when calling the external service";
 }
 
 

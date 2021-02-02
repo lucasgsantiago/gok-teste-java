@@ -17,7 +17,7 @@ public class ExternalAPIService {
 
     @Test
     public void whenAValidPlanetNameIsPassedShouldReturnAPlanet(){
-        SwapiPlanetDTO planet = swapiService.getPlanetByName("Tatooine");
+        SwapiPlanetDTO planet = swapiService.findPlanetByName("Tatooine");
         assertThat(planet,is(notNullValue()));
     }
 }

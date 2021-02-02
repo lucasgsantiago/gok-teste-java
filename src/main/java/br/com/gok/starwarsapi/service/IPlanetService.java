@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface IPlanetService {
     PageResponse<PlanetDTO> listAll(Pageable pageable);
-    List<PlanetDTO> filterByPopulation();
     PlanetDTO findByName(String name);
     PlanetDTO findById(Long id);
     PageResponse<PlanetDTO> filterByQuery(String query, Pageable pageable);

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -24,5 +25,5 @@ public class PlanetDTO {
     private Integer appearancesInMovies;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Set<String> films;
+    private List<String> films;
 }

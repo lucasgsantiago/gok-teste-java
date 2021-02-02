@@ -10,11 +10,11 @@ public class PopulationSearchCriteria extends SearchCriteria {
      public static final String KEY = "population";
 
      public PopulationSearchCriteria(String operation, Object value) {
-          super(KEY, operation, value, Stream.of(QueryOperators.EQUAL,QueryOperators.GRATER_THAN,QueryOperators.LASS_THAN)
+          super(KEY, operation, value, Stream.of(
+                  QueryOperators.EQUAL,
+                  QueryOperators.GRATER_THAN,
+                  QueryOperators.LASS_THAN)
                   .collect(Collectors.toSet()));
      }
 
-     private void validate(){
-
-     }
 }

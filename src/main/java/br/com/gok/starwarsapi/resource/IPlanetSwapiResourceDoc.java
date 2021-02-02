@@ -11,20 +11,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Tag(name = "API Planetas Star Wars ", description = "Consulta de planetas da série Star Wars")
+@Tag(name = "API Pública Star Wars ", description = "Consulta de planetas na api pública de Star Wars")
 public interface IPlanetSwapiResourceDoc {
-    @Operation(summary = "Retorna uma lista paginada de Planetas do banco de dados")
+    @Operation(summary = "Retorna uma lista paginada de Planetas da api pública")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de Planetas registrados no sistema"),
+            @ApiResponse(responseCode = "200", description = "Lista de Planetas da api pública"),
     })
     public PageResponse<PlanetDTO> get(@ParameterObject Pageable pageable);
-
-    @Operation(summary = "Retorna um Planeta a partir de um Id válido")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Planeta encontrado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Planeta não encontrado.")
-    })
-    public PlanetDTO findById(@PathVariable("id") Long id);
 
     @Operation(summary = "Retorna um Planeta a partir de um Nome válido")
     @ApiResponses(value = {
@@ -33,17 +26,4 @@ public interface IPlanetSwapiResourceDoc {
     })
     public PlanetDTO findByName(@RequestParam("name") String name);
 
-    @Operation(summary = "Retorna um Planeta a partir do filtro 'populacao'")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Planeta encontrado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Planeta não encontrado.")
-    })
-    public PageResponse<PlanetDTO> filterByPopulation(@RequestParam("query") String query, @ParameterObject Pageable pageable);
-
-    @Operation(summary = "Deleta Planeta encontrado a partir de um Id válido")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Planeta deletado com sucesso."),
-            @ApiResponse(responseCode = "404", description = "Planeta não encontrado.")
-    })
-    public void delete(@PathVariable Long id);
 }

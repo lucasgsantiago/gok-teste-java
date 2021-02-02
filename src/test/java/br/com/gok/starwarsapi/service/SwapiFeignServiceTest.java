@@ -1,12 +1,9 @@
 package br.com.gok.starwarsapi.service;
 
 import br.com.gok.starwarsapi.PlanetFactory;
-import br.com.gok.starwarsapi.domain.postgres.Planet;
-import br.com.gok.starwarsapi.dto.PlanetDTO;
 import br.com.gok.starwarsapi.dto.SwapiPageDTO;
 import br.com.gok.starwarsapi.dto.SwapiPlanetDTO;
 import br.com.gok.starwarsapi.exception.NotFoundException;
-import br.com.gok.starwarsapi.repository.PlanetJPARepository;
 import br.com.gok.starwarsapi.service.client.StarWarsPublicAPIClient;
 import br.com.gok.starwarsapi.util.PageResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,20 +14,15 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.validation.ConstraintViolationException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 class SwapiFeignServiceTest {
     @InjectMocks

@@ -6,7 +6,6 @@ import br.com.gok.starwarsapi.dto.SwapiPlanetDTO;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import org.springframework.data.domain.PageImpl;
 
 import java.util.List;
 
@@ -14,7 +13,19 @@ import java.util.List;
 public interface PlanetMapper {
     PlanetMapper INSTANCE = Mappers.getMapper(PlanetMapper.class);
 
-    Planet toDomain(SwapiPlanetDTO dto);
+    default Planet toDomain(SwapiPlanetDTO dto) {
+        if ( dto == null ) {
+            return null;
+        }
+        return Planet.builder()
+                .name(dto.getName())
+                .climate(dto.getClimate())
+                .terrain(dto.getTerrain())
+                .population(dto.getPopulation())
+                .appearancesInMovies(dto.getFilms().size())
+                .build();
+    }
+
     PlanetDTO toPresenter(Planet model);
     @IterableMapping(elementTargetType = PlanetDTO.class)
     List<PlanetDTO> toPresenter(List<Planet> list);

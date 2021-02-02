@@ -1,12 +1,17 @@
 package br.com.gok.starwarsapi.repository;
 
+import br.com.gok.starwarsapi.PlanetFactory;
 import br.com.gok.starwarsapi.domain.postgres.Planet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Optional;
@@ -23,8 +28,8 @@ class PlanetJPARepositoryTest {
 
     @Test
     @DisplayName("Save persists Planet when successful")
-    void save() {
-        Planet planetToBeSaved = new Planet().builder().name("Tatooine").climate("arid").population("200000").terrain("desert").appearancesInMovies(5).build();
+    void save_PersistsPlanet_WhenSuccessful() {
+        Planet planetToBeSaved = PlanetFactory.createPlanetToBeSaved();
         Planet savedPlanet = repository.save(planetToBeSaved);
 
         assertThat(savedPlanet).isNotNull();
@@ -44,17 +49,17 @@ class PlanetJPARepositoryTest {
     @Test
     @DisplayName("Save throw DataIntegrityViolationException when name already exists")
     void save_ThrowsDataIntegrityViolationException_WhenNameAlreadyExists(){
-        Planet planetToBeSaved = new Planet().builder().name("TatooineTest").climate("arid").population("200000").terrain("desert").appearancesInMovies(5).build();
-        Planet savedPlanet = repository.save(planetToBeSaved);
-        Planet planetTwo = new Planet().builder().name(savedPlanet.getName()).climate("arid").population("200000").terrain("desert").appearancesInMovies(5).build();
+        Planet planetToBeSaved = PlanetFactory.createPlanetToBeSaved();
+        repository.save(planetToBeSaved);
+        Planet planetTwo = PlanetFactory.createPlanetToBeSaved();
         assertThatExceptionOfType(DataIntegrityViolationException.class)
                 .isThrownBy(() -> this.repository.save(planetTwo));
     }
 
     @Test
-    @DisplayName("Delete persists Planet when successful")
-    void delete() {
-        Planet planetToBeSaved = new Planet().builder().name("Tatooine").climate("arid").population("200000").terrain("desert").appearancesInMovies(5).build();
+    @DisplayName("Delete Planet when successful")
+    void delete_Planet_WhenSuccessful() {
+        Planet planetToBeSaved = PlanetFactory.createPlanetToBeSaved();
         Planet savedPlanet = repository.save(planetToBeSaved);
 
         this.repository.delete(savedPlanet);
@@ -66,13 +71,21 @@ class PlanetJPARepositoryTest {
     @Test
     @DisplayName("Get All Planets when successful")
     void getAll() {
-//        Planet savedPlanet = repository.save(planetToBeSaved);
+        Planet planetToBeSaved = PlanetFactory.createPlanetToBeSaved();
+        Planet savedPlanet = repository.save(planetToBeSaved);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("name")));
+        Page<Planet> pagePlanet = this.repository.getAll(pageable);
+
+        assertThat(pagePlanet)
+                .isNotEmpty()
+                .contains(savedPlanet);
+        assertThat(pagePlanet.getTotalElements()).isEqualTo(1);
     }
 
     @Test
     @DisplayName("Get a Planet with a given name when successful")
     void findByName() {
-        Planet planetToBeSaved = new Planet().builder().name("Tatooine").climate("arid").population("200000").terrain("desert").appearancesInMovies(5).build();
+        Planet planetToBeSaved = PlanetFactory.createPlanetToBeSaved();
         Planet savedPlanet = repository.save(planetToBeSaved);
 
         String name = savedPlanet.getName();

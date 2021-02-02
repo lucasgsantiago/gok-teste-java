@@ -79,7 +79,7 @@ class PlanetResourceTest {
     void findByName_ReturnsAPlanet_WhenSuccessful(){
         String expectedName = PlanetFactory.createValidPlanetDTO().getName();
 
-        PlanetDTO planet = planetResource.findByName("anime");
+        PlanetDTO planet = planetResource.findByName(expectedName);
 
         assertThat(planet).isNotNull();
         assertThat(planet.getName()).isEqualTo(expectedName);

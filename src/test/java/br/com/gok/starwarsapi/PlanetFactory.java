@@ -2,6 +2,7 @@ package br.com.gok.starwarsapi;
 
 import br.com.gok.starwarsapi.domain.postgres.Planet;
 import br.com.gok.starwarsapi.dto.PlanetDTO;
+import br.com.gok.starwarsapi.dto.SwapiPlanetDTO;
 
 public class PlanetFactory {
 
@@ -15,5 +16,9 @@ public class PlanetFactory {
 
     public static PlanetDTO createValidPlanetDTO(){
         return new PlanetDTO().builder().id(1L).name("Tatooine").climate("arid").population("200000").terrain("desert").appearancesInMovies(5).build();
+    }
+
+    public static SwapiPlanetDTO createValidSwapiPlanetDTO(){
+        return new SwapiPlanetDTO().builder().name("Tatooine").climate("arid").population("200000").terrain("desert").build();
     }
 }

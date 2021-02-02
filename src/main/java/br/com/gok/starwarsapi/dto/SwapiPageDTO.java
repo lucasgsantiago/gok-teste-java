@@ -1,13 +1,14 @@
 package br.com.gok.starwarsapi.dto;
 
+import lombok.Data;
 import lombok.Value;
 
 import java.util.List;
 
-@Value
+@Data
 public class SwapiPageDTO {
-    public int count;
-    public String next;
-    public String previous;
-    public List<SwapiPlanetDTO> results;
+    private int count;
+    private String next;
+    private String previous;
+    private final List<SwapiPlanetDTO> results;
 }

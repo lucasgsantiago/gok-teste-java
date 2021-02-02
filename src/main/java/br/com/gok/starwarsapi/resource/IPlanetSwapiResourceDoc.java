@@ -1,6 +1,7 @@
 package br.com.gok.starwarsapi.resource;
 
 import br.com.gok.starwarsapi.dto.PlanetDTO;
+import br.com.gok.starwarsapi.dto.SwapiPlanetDTO;
 import br.com.gok.starwarsapi.util.PageResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,13 +18,13 @@ public interface IPlanetSwapiResourceDoc {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de Planetas da api pública"),
     })
-    public PageResponse<PlanetDTO> get(@ParameterObject Pageable pageable);
+    PageResponse<SwapiPlanetDTO> get(@ParameterObject Pageable pageable);
 
     @Operation(summary = "Retorna um Planeta a partir de um Nome válido")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Planeta encontrado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Planeta não encontrado.")
     })
-    public PlanetDTO findByName(@RequestParam("name") String name);
+    SwapiPlanetDTO findByName(@RequestParam("name") String name);
 
 }

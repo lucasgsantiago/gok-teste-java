@@ -13,7 +13,6 @@ public class EventPublisherService {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     void publishPlanetFoundFromSwapiEvent(final SwapiPageDTO message) {
-        System.out.println("Publishing custom event. ");
         PlanetFoundFromSwapiEvent event = new PlanetFoundFromSwapiEvent(this, message);
         applicationEventPublisher.publishEvent(event);
     }

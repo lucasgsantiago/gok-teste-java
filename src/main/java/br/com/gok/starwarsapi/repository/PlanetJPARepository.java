@@ -42,10 +42,10 @@ public class PlanetJPARepository implements IPlanetRepository {
         return repository.findById(id);
     }
 
-    @Override
-    public Page<Planet> findAll(Specification<Planet> specification, Pageable pageable) {
-        return repository.findAll(specification,pageable);
-    }
+//    @Override
+//    public Page<Planet> findAll(Specification<Planet> specification, Pageable pageable) {
+//        return repository.findAll(specification,pageable);
+//    }
 
     @Override
     public Page<Planet> filterByQuery(SearchCriteria searchCriteria, Pageable pageable) {

@@ -14,7 +14,7 @@ public interface IPlanetRepository {
     Page<Planet> getAll(Pageable pageable);
     Optional<Planet> findByName(String name);
     Optional<Planet> findById(Long id);
-    Page<Planet> findAll(Specification<Planet> specification, Pageable pageable);
+//    Page<Planet> findAll(Specification<Planet> specification, Pageable pageable);
     Page<Planet> filterByQuery(SearchCriteria searchCriteria, Pageable pageable);
     boolean existsByName(String name);
 }

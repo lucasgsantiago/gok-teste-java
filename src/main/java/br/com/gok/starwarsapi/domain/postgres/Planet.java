@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.validation.constraints.NotEmpty;
 
 import javax.persistence.*;
 
@@ -19,6 +20,7 @@ public class Planet extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "The planet name cannot be empty")
     private String name;
     private String climate;
     private String terrain;
